@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *  dao 层提供对数据的增删查改操作接口，具体的操作在 service 层实现
  */
 public interface UserDAO extends JpaRepository<User,Integer> {
-    User findByUsername(String username);
+    User findByAccount(String account);
 
-    User getByUsernameAndPassword(String username,String password);
+    User getByAccountAndPassword(String account,String password);
 }
 

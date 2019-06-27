@@ -28,10 +28,10 @@ public class LoginController {
     @ResponseBody
     public Result login(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
-        String username = requestUser.getUsername();
-        username = HtmlUtils.htmlEscape(username);
+        String account = requestUser.getAccount();
+        account = HtmlUtils.htmlEscape(account);
 
-        User user = userService.get(username, requestUser.getPassword());
+        User user = userService.get(account, requestUser.getPassword());
         if (null == user) {
             return new Result(400);
         } else {

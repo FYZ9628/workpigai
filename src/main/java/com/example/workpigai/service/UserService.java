@@ -25,11 +25,11 @@ public class UserService {
     }
 
     public User getByName(String username) {
-        return userDAO.findByUsername(username);
+        return userDAO.findByAccount(username);
     }
 
-    public User get(String username, String password){
-        return userDAO.getByUsernameAndPassword(username, password);
+    public User get(String account, String password){
+        return userDAO.getByAccountAndPassword(account, password);
     }
 
     public void add(User user) {
