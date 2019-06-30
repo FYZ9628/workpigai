@@ -11,20 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 
-import java.util.Objects;
-
 /**
  * 控制层  转发调用
  */
 
 @Controller
-public class LoginController {
-
+public class AdminLoginController {
     @Autowired
     UserService userService;
 
     @CrossOrigin
-    @PostMapping(value = "api/login")
+    @PostMapping(value = "api/admin_login")
     @ResponseBody
     public Result login(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
@@ -35,14 +32,10 @@ public class LoginController {
         User user = userService.get(account, requestUser.getPassword());
         if (null == user) {
             return new Result(400);
-        } else if (user.getType() == 3){
-            return new Result(300);
-        }else if (user.getType() == 2){
-            return new Result(200);
+        } else if (user.getType() == 1){
+            return new Result(100);
         } else {
             return new Result(400);
         }
     }
-
 }
-

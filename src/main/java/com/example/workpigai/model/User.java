@@ -9,14 +9,19 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 
 public class User {
+    //主键定义，只能有一个，选择对应的列名
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
 
+//    //主键定义，只能有一个，选择对应的列名
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "account")
     String account;
+
     String password;
-    String name;
     int type;
 
     public int getId() {
@@ -41,14 +46,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getType() {

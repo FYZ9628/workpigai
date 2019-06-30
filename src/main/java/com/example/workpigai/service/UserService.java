@@ -1,9 +1,11 @@
 package com.example.workpigai.service;
 
-import com.example.workpigai.dao.UserDAO;
+import com.example.workpigai.dao.UserDao;
 import com.example.workpigai.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  *
@@ -17,23 +19,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     @Autowired
-    UserDAO userDAO;
+    UserDao userDao;
 
-    public boolean isExist(String username) {
-        User user = getByName(username);
+    public boolean isExist(String account) {
+        User user = getByAccount(account);
         return null!=user;
     }
 
-    public User getByName(String username) {
-        return userDAO.findByAccount(username);
+    public User getByAccount(String account) {
+        return userDao.findByAccount(account);
     }
 
     public User get(String account, String password){
-        return userDAO.getByAccountAndPassword(account, password);
+        return userDao.getByAccountAndPassword(account, password);
     }
 
     public void add(User user) {
-        userDAO.save(user);
+        userDao.save(user);
+    }
+
+
+
+    public List<User> searchByAccount(String account) {
+        return userDao.findAllByAccountLike(account);
     }
 }
 
