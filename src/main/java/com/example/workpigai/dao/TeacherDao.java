@@ -10,6 +10,7 @@ public interface TeacherDao extends JpaRepository<Teacher,Integer> {
 
     List<Teacher> findAllByNameLikeOrUser_AccountLike(String name, String account);
 
+    Teacher findById(int id);
 
     //----------------------------------- 暂时没有用到 ------------------------------------------------------
     List<Teacher> findAllByUser(User user);

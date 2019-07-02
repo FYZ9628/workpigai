@@ -1,6 +1,7 @@
 package com.example.workpigai.service;
 
 import com.example.workpigai.dao.UserDao;
+import com.example.workpigai.model.Teacher;
 import com.example.workpigai.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,17 @@ public class UserService {
         userDao.save(user);
     }
 
+    //    通过 id 删除
+    public void deleteById(int id) {
+        userDao.deleteById(id);
+    }
 
 
+
+    //----------------------------------- 暂时没有用到 ------------------------------------------------------
     public List<User> searchByAccount(String account) {
         return userDao.findAllByAccountLike(account);
     }
+    //----------------------------------- 暂时没有用到 ------------------------------------------------------
 }
 

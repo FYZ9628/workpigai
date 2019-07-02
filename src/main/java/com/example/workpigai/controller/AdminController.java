@@ -3,10 +3,7 @@ package com.example.workpigai.controller;
 import com.example.workpigai.model.*;
 import com.example.workpigai.model.Class;
 import com.example.workpigai.result.Result;
-import com.example.workpigai.service.ClassService;
-import com.example.workpigai.service.StudentService;
-import com.example.workpigai.service.TeacherService;
-import com.example.workpigai.service.UserService;
+import com.example.workpigai.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +24,8 @@ public class AdminController {
     StudentService studentService;
     @Autowired
     UserService userService;
+    @Autowired
+    ChoseCourseService choseCourseService;
 
     @GetMapping("/api/teacherInfo")
     public List<Teacher> teacherList() throws Exception {
@@ -45,16 +44,22 @@ public class AdminController {
     }
 
 
+    @GetMapping("/api/choseCourseInfo")
+    public List<ChoseCourse> choseCourseList() throws Exception {
+        return choseCourseService.choseCourseList();
+    }
+
+
+
     @PostMapping("/api/searchTeacher")
-    public List<Teacher> findAllByNameLikeOrUser_AccountLike(@RequestBody Search s) throws Exception {
+    public List<Teacher> teacherFindAllByNameLikeOrUser_AccountLike(@RequestBody Search s) throws Exception {
 
         return teacherService.findAllByNameLikeOrUser_AccountLike(s.getKeywords());
     }
 
 
-
     @PostMapping("/api/addTeacher")
-    public Teacher addOrUpdate(@RequestBody Teacher teacher) throws Exception {
+    public Teacher addOrUpdateTeacher(@RequestBody Teacher teacher) throws Exception {
 
         userService.add(teacher.getUser());
         teacher = teacherService.addOrUpTeacher(teacher);
@@ -63,8 +68,57 @@ public class AdminController {
     }
 
 
+    @PostMapping("/api/deleteTeacher")
+    public Result deleteTeacher(@RequestBody Teacher teacherId) throws Exception {
+        //因为前端只是传了一个 id 过来，所以 teacherId 里面只有一个 id 没有其他信息
+        //所以要再通过 id 查询 teacher 的其他信息
+        Teacher teacher = teacherService.findById(teacherId.getId());
+        if (teacher != null){
+            teacherService.deleteById(teacherId.getId());
+            userService.deleteById(teacher.getUser().getId());
+            //   删除成功返回码 100
+            return new Result(100);
+        } else {
+            //   删除失败返回码 400
+            return new Result(400);
+        }
+    }
 
 
+
+
+    @PostMapping("/api/searchStudent")
+    public List<Student> studentFindAllByNameLikeOrUser_AccountLike(@RequestBody Search s) throws Exception {
+
+        return studentService.findAllByNameLikeOrUser_AccountLike(s.getKeywords());
+    }
+
+
+    @PostMapping("/api/addStudent")
+    public Student addOrUpdateStudent(@RequestBody Student student) throws Exception {
+
+        userService.add(student.getUser());
+        student = studentService.addOrUpStudent(student);
+
+        return student;
+    }
+
+
+    @PostMapping("/api/deleteStudent")
+    public Result deleteStudent(@RequestBody Student studentId) throws Exception {
+        //因为前端只是传了一个 id 过来，所以 teacherId 里面只有一个 id 没有其他信息
+        //所以要再通过 id 查询 teacher 的其他信息
+        Student student = studentService.findById(studentId.getId());
+        if (student != null){
+            studentService.deleteById(studentId.getId());
+            userService.deleteById(student.getUser().getId());
+            //   删除成功返回码 100
+            return new Result(100);
+        } else {
+            //   删除失败返回码 400
+            return new Result(400);
+        }
+    }
 
 
 

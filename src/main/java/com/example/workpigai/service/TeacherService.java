@@ -33,8 +33,21 @@ public class TeacherService {
 
     //根据姓名或账号查询
     public List<Teacher> findAllByNameLikeOrUser_AccountLike(String keywords) {
-        return teacherDao.findAllByNameLikeOrUser_AccountLike('%' + keywords + '%', '%' + keywords + '%');
+        return teacherDao.findAllByNameLikeOrUser_AccountLike('%'
+                + keywords + '%', '%' + keywords + '%');
     }
+
+
+    //    通过 id 删除
+    public void deleteById(int id) {
+        teacherDao.deleteById(id);
+    }
+
+    //    通过  id 查询
+    public Teacher findById(int id){
+        return teacherDao.findById(id);
+    }
+
 
 
 
