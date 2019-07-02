@@ -61,10 +61,16 @@ public class AdminController {
     @PostMapping("/api/addTeacher")
     public Teacher addOrUpdateTeacher(@RequestBody Teacher teacher) throws Exception {
 
-        userService.add(teacher.getUser());
-        teacher = teacherService.addOrUpTeacher(teacher);
+        boolean bl = userService.isExist(teacher.getUser().getAccount());
+        if (bl == true){
+            return null;
+        }else {
+            userService.add(teacher.getUser());
+            teacher = teacherService.addOrUpTeacher(teacher);
 
-        return teacher;
+            return teacher;
+        }
+
     }
 
 
@@ -97,10 +103,16 @@ public class AdminController {
     @PostMapping("/api/addStudent")
     public Student addOrUpdateStudent(@RequestBody Student student) throws Exception {
 
-        userService.add(student.getUser());
-        student = studentService.addOrUpStudent(student);
 
-        return student;
+        boolean bl = userService.isExist(student.getUser().getAccount());
+        if (bl == true){
+            return null;
+        }else {
+            userService.add(student.getUser());
+            student = studentService.addOrUpStudent(student);
+
+            return student;
+        }
     }
 
 
