@@ -42,49 +42,63 @@ public class AdminControllerChoseCourse {
         return choseCourseService.findAllByCourseNameLikeOrTeacher_NameLikeOrMClass_ClassNameLike(s.getKeywords());
     }
 
-//    @PostMapping("/api/addChoseCourse")
-//    public ChoseCourse addChoseCourse(@RequestBody ChoseCourse choseCourse) throws Exception {
-//
-//        System.out.println("测试添加选课");
-//        System.out.println(choseCourse);
-//
-//        boolean bl = choseCourseService.isExist(choseCourse.getId());
-//        if (bl == true){
-//            return null;
-//        }else {
-//            choseCourse = choseCourseService.addOrUpdateChoseCourse(choseCourse);
-//            return choseCourse;
-//        }
-//    }
 
     @PostMapping("/api/addChoseCourse")
     public ChoseCourse addChoseCourse(@RequestBody courseReturnData courseReturnData) throws Exception {
 
-        Class mClass = classService.findById(courseReturnData.getClassId());
-        Teacher teacher = teacherService.findById(courseReturnData.getTeacherId());
-        Course course = courseService.findById(courseReturnData.getCourseId());
+        boolean bl = choseCourseService.isExist(courseReturnData.getChooseCourseId());
+        if (bl == true){
+            return null;
+        }else {
+            Class mClass = classService.findById(courseReturnData.getClassId());
+            Teacher teacher = teacherService.findById(courseReturnData.getTeacherId());
+            Course course = courseService.findById(courseReturnData.getCourseId());
 
-        ChoseCourse choseCourse = new ChoseCourse();
-        choseCourse.setmClass(mClass);
-        choseCourse.setTeacher(teacher);
-        choseCourse.setCourseName(course.getName());
+            ChoseCourse choseCourse = new ChoseCourse();
+            choseCourse.setmClass(mClass);
+            choseCourse.setTeacher(teacher);
+            choseCourse.setCourseName(course.getName());
 
-        ChoseCourse choseCourse2 = choseCourseService.addOrUpdateChoseCourse(choseCourse);
+            ChoseCourse choseCourse2 = choseCourseService.addOrUpdateChoseCourse(choseCourse);
 
-        return choseCourse2;
+            return choseCourse2;
+        }
     }
 
     @PostMapping("/api/updateChoseCourse")
-    public ChoseCourse updateChoseCourse(@RequestBody ChoseCourse choseCourse) throws Exception {
+    public ChoseCourse updateChoseCourse(@RequestBody courseReturnData courseReturnData) throws Exception {
 
-        boolean bl = choseCourseService.isExist(choseCourse.getId());
+        boolean bl = choseCourseService.isExist(courseReturnData.getChooseCourseId());
         if (bl == true){
-            choseCourse = choseCourseService.addOrUpdateChoseCourse(choseCourse);
-            return choseCourse;
+            Class mClass = classService.findById(courseReturnData.getClassId());
+            Teacher teacher = teacherService.findById(courseReturnData.getTeacherId());
+            Course course = courseService.findById(courseReturnData.getCourseId());
+
+            ChoseCourse choseCourse = new ChoseCourse();
+            choseCourse.setId(courseReturnData.getChooseCourseId());
+            choseCourse.setmClass(mClass);
+            choseCourse.setTeacher(teacher);
+            choseCourse.setCourseName(course.getName());
+
+            ChoseCourse choseCourse2 = choseCourseService.addOrUpdateChoseCourse(choseCourse);
+            return choseCourse2;
+
         }else {
             return null;
         }
     }
+
+//    @PostMapping("/api/updateChoseCourse")
+//    public ChoseCourse updateChoseCourse(@RequestBody ChoseCourse choseCourse) throws Exception {
+//
+//        boolean bl = choseCourseService.isExist(choseCourse.getId());
+//        if (bl == true){
+//            choseCourse = choseCourseService.addOrUpdateChoseCourse(choseCourse);
+//            return choseCourse;
+//        }else {
+//            return null;
+//        }
+//    }
 
 
     @PostMapping("/api/deleteChoseCourse")
