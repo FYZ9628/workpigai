@@ -9,21 +9,24 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Class {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     int id;
 
     //主键定义，只能有一个，选择对应的列名
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "class_id")
-    int classId;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "class_id")
+    String classId;
 
     String className;
 
-    public int getClassId() {
+    public String getClassId() {
         return classId;
     }
 
-    public void setClassId(int classId) {
+    public void setClassId(String classId) {
         this.classId = classId;
     }
 
