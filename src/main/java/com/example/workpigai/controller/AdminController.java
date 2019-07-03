@@ -184,7 +184,7 @@ public class AdminController {
 //        if (bl == true){
 //            return null;
 //        }else {
-//            mClass = classService.addOrUpdateClass(mClass);
+//            mClass = classService.addOrUpdateWorkDetail(mClass);
 //            return mClass;
 //        }
 //    }
@@ -193,7 +193,7 @@ public class AdminController {
 //
 //        boolean bl = classService.isExist(mClass.getId());
 //        if (bl == true){
-//            mClass = classService.addOrUpdateClass(mClass);
+//            mClass = classService.addOrUpdateWorkDetail(mClass);
 //            return mClass;
 //        }else {
 //            return null;

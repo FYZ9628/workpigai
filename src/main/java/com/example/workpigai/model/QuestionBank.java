@@ -15,7 +15,7 @@ public class QuestionBank {
     @Column(name = "id")
     int id;
 
-    int questionId;
+    String questionId;
     String title;
     String content;
     String answer;
@@ -28,11 +28,11 @@ public class QuestionBank {
         this.id = id;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 

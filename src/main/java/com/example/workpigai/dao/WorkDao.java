@@ -4,6 +4,8 @@ import com.example.workpigai.model.User;
 import com.example.workpigai.model.Work;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 
 /**
  *
@@ -13,5 +15,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface WorkDao extends JpaRepository<Work,Integer> {
 
+    List<Work> findAllByTeacher_NameLikeOrWorkDetail_WorkTitleLike(String teacherName, String workTitle);
+
+    Work findById(int id);
 
 }

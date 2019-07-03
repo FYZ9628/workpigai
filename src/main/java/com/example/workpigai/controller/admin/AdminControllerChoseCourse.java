@@ -61,12 +61,12 @@ public class AdminControllerChoseCourse {
 
 
     @PostMapping("/api/deleteChoseCourse")
-    public Result deleteChoseCourse(@RequestBody ChoseCourse choseCourseId) throws Exception {
+    public Result deleteChoseCourse(int id) throws Exception {
         //因为前端只是传了一个 id (序号) 过来，所以 choseCourseId 里面只有一个 id 没有其他信息
         //所以要再通过 id 查询 ChoseCourse 的其他信息
-        ChoseCourse choseCourse = choseCourseService.findById(choseCourseId.getId());
+        ChoseCourse choseCourse = choseCourseService.findById(id);
         if (choseCourse != null){
-            choseCourseService.deleteById(choseCourseId.getId());
+            choseCourseService.deleteById(id);
             //   删除成功返回码 100
             return new Result(100);
         } else {
@@ -74,4 +74,20 @@ public class AdminControllerChoseCourse {
             return new Result(400);
         }
     }
+
+
+//    @PostMapping("/api/deleteChoseCourse")
+//    public Result deleteChoseCourse(@RequestBody ChoseCourse choseCourseId) throws Exception {
+//        //因为前端只是传了一个 id (序号) 过来，所以 choseCourseId 里面只有一个 id 没有其他信息
+//        //所以要再通过 id 查询 ChoseCourse 的其他信息
+//        ChoseCourse choseCourse = choseCourseService.findById(choseCourseId.getId());
+//        if (choseCourse != null){
+//            choseCourseService.deleteById(choseCourseId.getId());
+//            //   删除成功返回码 100
+//            return new Result(100);
+//        } else {
+//            //   删除失败返回码 400
+//            return new Result(400);
+//        }
+//    }
 }

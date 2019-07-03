@@ -3,6 +3,8 @@ package com.example.workpigai.dao;
 import com.example.workpigai.model.WorkDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  *
  *  数据持久层  提供简单的操作接口
@@ -11,6 +13,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface WorkDetailDao extends JpaRepository<WorkDetail,Integer> {
 
+    List<WorkDetail> findAllByWorkTitleLike(String workTitle);
+
+    WorkDetail findById(int id);
 
 
 }

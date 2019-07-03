@@ -20,4 +20,31 @@ public class WorkService {
         Sort sort = new Sort(Sort.Direction.ASC, "id");
         return workDao.findAll(sort);
     }
+
+
+    //添加或更新教师已经发布的作业信息
+    public Work addOrUpdateWork(Work work) {
+        return workDao.save(work);
+    }
+
+    //根据教师名称或作业标题查询
+    public List<Work> findAllByTeacher_NameLikeOrWorkDetail_WorkTitleLike(String keywords) {
+        return workDao.findAllByTeacher_NameLikeOrWorkDetail_WorkTitleLike('%'
+                + keywords + '%','%' + keywords + '%');
+    }
+
+    //    通过 id 删除
+    public void deleteById(int id) {
+        workDao.deleteById(id);
+    }
+
+    //    通过  id 查询
+    public Work findById(int id){
+        return workDao.findById(id);
+    }
+
+    public boolean isExist(int id) {
+        Work work = findById(id);
+        return null!=work;
+    }
 }

@@ -27,21 +27,25 @@ public class TeacherController {
     QuestionBankService questionBankService;
 
 
-    @GetMapping("/api/workInfo")
-    public List<Work> workList() throws Exception {
-        return workService.workList();
-    }
+//    @GetMapping("/api/workInfo")
+//    public List<Work> workList() throws Exception {
+//        return workService.workList();
+//    }
+//
+//    @GetMapping("/api/workDetailInfo")
+//    public List<WorkDetail> workDetailList() throws Exception {
+//        return workDetailService.workDetailList();
+//    }
+//
+//
+//    @GetMapping("/api/questionBankInfo")
+//    public List<QuestionBank> questionBankList() throws Exception {
+//        return questionBankService.questionBankList();
+//    }
 
-    @GetMapping("/api/workDetailInfo")
-    public List<WorkDetail> workDetailList() throws Exception {
-        return workDetailService.workDetailList();
-    }
 
 
-    @GetMapping("/api/questionBankInfo")
-    public List<QuestionBank> questionBankList() throws Exception {
-        return questionBankService.questionBankList();
-    }
+
 
 
 
