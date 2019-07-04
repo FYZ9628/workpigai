@@ -63,29 +63,13 @@ public class TeacherControllerQuestionBankInfo {
     }
 
 
-    @PostMapping("/api/deleteQuestionBank")
-    public Result deleteClass(@RequestBody int id) throws Exception {
-        //因为前端只是传了一个 id (序号) 过来
-        //所以要再通过 id 查询 Class 的其他信息
-        QuestionBank mClass = questionBankService.findById(id);
-        if (mClass != null){
-            questionBankService.deleteById(id);
-            //   删除成功返回码 100
-            return new Result(100);
-        } else {
-            //   删除失败返回码 400
-            return new Result(400);
-        }
-    }
-
-
 //    @PostMapping("/api/deleteQuestionBank")
-//    public Result deleteClass( QuestionBank questionBank) throws Exception {
-//        //因为前端只是传了一个 id (序号) 过来，所以 mClassId 里面只有一个 id 没有其他信息
+//    public Result deleteClass(@RequestBody int id) throws Exception {
+//        //因为前端只是传了一个 id (序号) 过来
 //        //所以要再通过 id 查询 Class 的其他信息
-//        QuestionBank mClass = questionBankService.findById(questionBank.getId());
-//        if (mClass != null){
-//            questionBankService.deleteById(questionBank.getId());
+//        QuestionBank questionBank = questionBankService.findById(id);
+//        if (questionBank != null){
+//            questionBankService.deleteById(id);
 //            //   删除成功返回码 100
 //            return new Result(100);
 //        } else {
@@ -93,6 +77,23 @@ public class TeacherControllerQuestionBankInfo {
 //            return new Result(400);
 //        }
 //    }
+
+
+    @PostMapping("/api/deleteQuestionBank")
+    public Result deleteClass(@RequestBody QuestionBank questionBank) throws Exception {
+        //因为前端只是传了一个 id (序号) 过来，所以 mClassId 里面只有一个 id 没有其他信息
+        //所以要再通过 id 查询 Class 的其他信息
+
+        QuestionBank questionBank1 = questionBankService.findById(questionBank.getId());
+        if (questionBank1 != null){
+            questionBankService.deleteById(questionBank.getId());
+            //   删除成功返回码 100
+            return new Result(100);
+        } else {
+            //   删除失败返回码 400
+            return new Result(400);
+        }
+    }
 
 
 }
