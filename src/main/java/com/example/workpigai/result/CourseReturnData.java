@@ -1,6 +1,6 @@
 package com.example.workpigai.result;
 
-public class courseReturnData {
+public class CourseReturnData {
 
     int chooseCourseId;
     int courseId;

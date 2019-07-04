@@ -4,6 +4,7 @@ import com.example.workpigai.model.QuestionBank;
 import com.example.workpigai.model.Teacher;
 import com.example.workpigai.model.Work;
 import com.example.workpigai.model.WorkDetail;
+import com.example.workpigai.result.CheckWorkPost;
 import com.example.workpigai.result.Result;
 import com.example.workpigai.service.QuestionBankService;
 import com.example.workpigai.service.TeacherService;
@@ -34,8 +35,6 @@ public class TeacherController {
     TeacherService teacherService;
 
 
-//    findByUser_Account(user.getAccount())
-
     @PostMapping("/api/getTeacher")
     public Teacher getTeacher(@RequestBody Teacher teacher) throws Exception {
         //因为前端只是传了一个 id (序号) 过来
@@ -47,6 +46,22 @@ public class TeacherController {
             return null;
         }
     }
+
+    @PostMapping("/api/checkWork")
+    public Work checkWork(@RequestBody CheckWorkPost checkWorkPost) throws Exception {
+        //因为前端只是传了一个 id (序号) 过来
+        //所以要再通过 id 查询 Class 的其他信息
+
+        Work work = workService.findById(checkWorkPost.getWorkId());
+        if (work != null){
+            work.setScore(checkWorkPost.getScore());
+            workService.addOrUpdateWork(work);
+            return work;
+        } else {
+            return null;
+        }
+    }
+
 
 
 //    @GetMapping("/api/workInfo")

@@ -1,6 +1,6 @@
 package com.example.workpigai.result;
 
-public class userPost {
+public class UserPost {
 
     String account;
     String oldPassword;

@@ -4,7 +4,7 @@ import com.example.workpigai.model.*;
 import com.example.workpigai.model.Class;
 import com.example.workpigai.result.Result;
 import com.example.workpigai.result.Search;
-import com.example.workpigai.result.courseReturnData;
+import com.example.workpigai.result.CourseReturnData;
 import com.example.workpigai.service.ChoseCourseService;
 import com.example.workpigai.service.ClassService;
 import com.example.workpigai.service.CourseService;
@@ -46,7 +46,7 @@ public class AdminControllerChoseCourse {
 
 
     @PostMapping("/api/addChoseCourse")
-    public ChoseCourse addChoseCourse(@RequestBody courseReturnData courseReturnData) throws Exception {
+    public ChoseCourse addChoseCourse(@RequestBody CourseReturnData courseReturnData) throws Exception {
 
         boolean bl = choseCourseService.isExist(courseReturnData.getChooseCourseId());
         if (bl == true){
@@ -68,7 +68,7 @@ public class AdminControllerChoseCourse {
     }
 
     @PostMapping("/api/updateChoseCourse")
-    public ChoseCourse updateChoseCourse(@RequestBody courseReturnData courseReturnData) throws Exception {
+    public ChoseCourse updateChoseCourse(@RequestBody CourseReturnData courseReturnData) throws Exception {
 
         boolean bl = choseCourseService.isExist(courseReturnData.getChooseCourseId());
         if (bl == true){
