@@ -1,7 +1,11 @@
 package com.example.workpigai.controller;
 
+import com.example.workpigai.model.Student;
+import com.example.workpigai.model.Teacher;
 import com.example.workpigai.model.User;
 import com.example.workpigai.result.Result;
+import com.example.workpigai.service.StudentService;
+import com.example.workpigai.service.TeacherService;
 import com.example.workpigai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,10 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
 
     @CrossOrigin
     @PostMapping(value = "api/login")
@@ -36,9 +44,19 @@ public class LoginController {
         if (null == user) {
             return new Result(400);
         } else if (user.getType() == 3){
-            return new Result(300);
+            Student student = studentService.findByUser_Account(user.getAccount());
+            String mAccount = user.getAccount();
+            String mPassword = user.getPassword();
+            String mName = student.getName();
+
+            return new Result(300, mAccount, mPassword, mName);
         }else if (user.getType() == 2){
-            return new Result(200);
+
+            Teacher teacher = teacherService.findByUser_Account(user.getAccount());
+            String mAccount = user.getAccount();
+            String mPassword = user.getPassword();
+            String mName = teacher.getName();
+            return new Result(200, mAccount, mPassword, mName);
         } else {
             return new Result(400);
         }

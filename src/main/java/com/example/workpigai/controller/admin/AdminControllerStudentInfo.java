@@ -1,5 +1,6 @@
 package com.example.workpigai.controller.admin;
 
+import com.example.workpigai.model.Class;
 import com.example.workpigai.model.Search;
 import com.example.workpigai.model.Student;
 import com.example.workpigai.result.Result;
@@ -58,8 +59,12 @@ public class AdminControllerStudentInfo {
     @PostMapping("/api/updateStudent")
     public Student updateStudent(@RequestBody Student student) throws Exception {
 
+
+
         boolean bl = userService.isExist(student.getUser().getAccount());
         if (bl == true){
+            Class mClass = classService.findById(student.getmClass().getId());
+            student.setmClass(mClass);
             userService.add(student.getUser());
             student = studentService.addOrUpStudent(student);
             return student;

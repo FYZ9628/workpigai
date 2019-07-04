@@ -12,6 +12,9 @@ public interface TeacherDao extends JpaRepository<Teacher,Integer> {
 
     Teacher findById(int id);
 
+
+    Teacher findByUser_Account(String account);
+
     //----------------------------------- 暂时没有用到 ------------------------------------------------------
     List<Teacher> findAllByUser(User user);
     List<Teacher> findTeachersByUser_Account(String account);

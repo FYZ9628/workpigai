@@ -49,6 +49,10 @@ public class TeacherService {
     }
 
 
+    //    通过  account 查询
+    public Teacher findByUser_Account(String account){
+        return teacherDao.findByUser_Account(account);
+    }
 
 
     //----------------------------------- 暂时没有用到 ------------------------------------------------------
