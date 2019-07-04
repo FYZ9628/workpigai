@@ -2,6 +2,7 @@ package com.example.workpigai.controller;
 
 import com.example.workpigai.model.User;
 import com.example.workpigai.result.Result;
+import com.example.workpigai.result.userPost;
 import com.example.workpigai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,14 +43,19 @@ public class AdminLoginController {
     }
 
     @PostMapping("/api/updatePassword")
-    public User updatePassword(@RequestBody User user) throws Exception {
+    public User updatePassword(@RequestBody userPost userPost) throws Exception {
 
-        boolean bl = userService.isExist(user.getAccount());
-        if (bl == true){
-            User user1 = userService.addOrUpdateUser(user);
-            User userId = userService.getByAccount(user.getAccount());
-            user1.setId(userId.getId());
-            return user1;
+        User user = userService.get(userPost.getAccount(), userPost.getOldPassword());
+        if (user != null){
+            User newUser = new User();
+            User userId = userService.getByAccount(userPost.getAccount());
+            newUser.setId(userId.getId());
+            newUser.setAccount(userPost.getAccount());
+            newUser.setPassword(userPost.getNewPassword());
+            newUser.setType(user.getType());
+
+            userService.addOrUpdateUser(newUser);
+            return newUser;
         }else {
             return null;
         }

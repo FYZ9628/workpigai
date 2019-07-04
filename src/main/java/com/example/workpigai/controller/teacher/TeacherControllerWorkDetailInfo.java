@@ -106,17 +106,15 @@ public class TeacherControllerWorkDetailInfo {
 
             Date date = new Date();
             SimpleDateFormat startTime=new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
-//        System.out.println(startTime.format(date));
 
             for (int i = 0; i < studentList.size(); i++) {
                 Work work = new Work();
                 work.setWorkDetail(workDetail);
                 work.setTeacher(teacher);
                 work.setState("未提交");
-                work.setSubmitContent("发布测试");
+                work.setSubmitContent("");
                 work.setStartTime(startTime.format(date));
-//        work.setEndTime(publishWork.getEndTime());  //时间格式不对
-                work.setEndTime(startTime.format(date));
+                work.setEndTime(publishWork.getEndTime());  //时间格式不对
                 work.setStudent(studentList.get(i));
                 workService.addOrUpdateWork(work);
             }
