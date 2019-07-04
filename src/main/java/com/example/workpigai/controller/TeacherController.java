@@ -51,7 +51,6 @@ public class TeacherController {
     public Work checkWork(@RequestBody CheckWorkPost checkWorkPost) throws Exception {
         //因为前端只是传了一个 id (序号) 过来
         //所以要再通过 id 查询 Class 的其他信息
-
         Work work = workService.findById(checkWorkPost.getWorkId());
         if (work != null){
             work.setScore(checkWorkPost.getScore());

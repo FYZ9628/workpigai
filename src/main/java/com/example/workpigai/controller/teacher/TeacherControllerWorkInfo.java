@@ -1,8 +1,11 @@
 package com.example.workpigai.controller.teacher;
 
+import com.example.workpigai.model.WorkDetail;
+import com.example.workpigai.result.DeleteWorkDetailPost;
 import com.example.workpigai.result.Search;
 import com.example.workpigai.model.Work;
 import com.example.workpigai.result.Result;
+import com.example.workpigai.service.WorkDetailService;
 import com.example.workpigai.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +24,8 @@ public class TeacherControllerWorkInfo {
 
     @Autowired
     WorkService workService;
+    @Autowired
+    WorkDetailService workDetailService;
 
     @GetMapping("/api/workInfo")
     public List<Work> workList() throws Exception {
@@ -67,12 +72,18 @@ public class TeacherControllerWorkInfo {
 
 
     @PostMapping("/api/deleteWork")
-    public Result deleteWork(@RequestBody int id) throws Exception {
+    public Result deleteWork(@RequestBody DeleteWorkDetailPost deleteWorkDetailPost) throws Exception {
         //因为前端只是传了一个 id (序号) 过来
         //所以要再通过 id 查询 Class 的其他信息
-        Work workDetail = workService.findById(id);
+        WorkDetail workDetail = workDetailService.findById(deleteWorkDetailPost.getWorkDetailId());
         if (workDetail != null){
-            workService.deleteById(id);
+            List<Work> workList = workService.workList();
+            for (int i = 0; i < workList.size(); i++) {
+                if (workList.get(i).getWorkDetail().getId() == deleteWorkDetailPost.getWorkDetailId()){
+                    workService.deleteById(workList.get(i).getId());
+                }
+            }
+            workDetailService.deleteById(deleteWorkDetailPost.getWorkDetailId());
             //   删除成功返回码 100
             return new Result(100);
         } else {
