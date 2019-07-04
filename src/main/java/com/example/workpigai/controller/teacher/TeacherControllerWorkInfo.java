@@ -27,6 +27,12 @@ public class TeacherControllerWorkInfo {
         return workService.workList();
     }
 
+    @PostMapping("/api/getTeacherPersonalWork")
+    public List<Work> findAllByTeacher_User_Account(@RequestBody Search s) throws Exception {
+
+        return workService.findAllByTeacher_User_Account(s.getKeywords());
+    }
+
 
     @PostMapping("/api/searchWork")
     public List<Work> findAllByTeacher_NameLikeOrWorkDetail_WorkTitleLike(@RequestBody Search s) throws Exception {

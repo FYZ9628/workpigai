@@ -33,6 +33,16 @@ public class WorkService {
                 + keywords + '%','%' + keywords + '%');
     }
 
+    //根据账号查询当前学生
+    public List<Work> findAllByStudent_User_Account(String keywords) {
+        return workDao.findAllByStudent_User_Account(keywords);
+    }
+
+    //根据账号查询
+    public List<Work> findAllByTeacher_User_Account(String keywords) {
+        return workDao.findAllByTeacher_User_Account(keywords);
+    }
+
     //    通过 id 删除
     public void deleteById(int id) {
         workDao.deleteById(id);

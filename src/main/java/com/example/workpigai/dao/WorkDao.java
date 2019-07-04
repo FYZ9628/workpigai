@@ -17,6 +17,10 @@ public interface WorkDao extends JpaRepository<Work,Integer> {
 
     List<Work> findAllByTeacher_NameLikeOrWorkDetail_WorkTitleLike(String teacherName, String workTitle);
 
+    List<Work> findAllByStudent_User_Account(String account);
+
+    List<Work> findAllByTeacher_User_Account(String account);
+
     Work findById(int id);
 
 }
