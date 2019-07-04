@@ -49,6 +49,17 @@ public class StudentService {
         return studentDao.findByUser_Account(account);
     }
 
+    //    通过  班级 id 查询
+    public Student findByMClass_Id(int id){
+        return studentDao.findByMClass_Id(id);
+    }
+
+
+    //    通过  班级 id 查询
+    public List<Student> findAllByMClass_Id(int id){
+        return studentDao.findAllByMClass_Id(id);
+    }
+
 
 
 }

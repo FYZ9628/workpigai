@@ -12,7 +12,10 @@ public interface StudentDao extends JpaRepository<Student,Integer> {
 
     Student findById(int id);
 
-
     Student findByUser_Account(String account);
+
+    Student findByMClass_Id(int id);
+
+    List<Student> findAllByMClass_Id(int id);
 
 }
