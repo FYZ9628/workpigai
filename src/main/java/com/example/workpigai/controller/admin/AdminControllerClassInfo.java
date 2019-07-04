@@ -1,7 +1,7 @@
 package com.example.workpigai.controller.admin;
 
 import com.example.workpigai.model.Class;
-import com.example.workpigai.model.Search;
+import com.example.workpigai.result.Search;
 import com.example.workpigai.result.Result;
 import com.example.workpigai.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;

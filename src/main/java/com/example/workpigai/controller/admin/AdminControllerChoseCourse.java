@@ -3,6 +3,8 @@ package com.example.workpigai.controller.admin;
 import com.example.workpigai.model.*;
 import com.example.workpigai.model.Class;
 import com.example.workpigai.result.Result;
+import com.example.workpigai.result.Search;
+import com.example.workpigai.result.courseReturnData;
 import com.example.workpigai.service.ChoseCourseService;
 import com.example.workpigai.service.ClassService;
 import com.example.workpigai.service.CourseService;

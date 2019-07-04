@@ -1,8 +1,15 @@
 package com.example.workpigai.controller.teacher;
 
-import com.example.workpigai.model.Search;
+import com.example.workpigai.model.Class;
+import com.example.workpigai.model.Student;
+import com.example.workpigai.model.Teacher;
+import com.example.workpigai.result.Search;
 import com.example.workpigai.model.WorkDetail;
 import com.example.workpigai.result.Result;
+import com.example.workpigai.result.PublishWork;
+import com.example.workpigai.service.ClassService;
+import com.example.workpigai.service.StudentService;
+import com.example.workpigai.service.TeacherService;
 import com.example.workpigai.service.WorkDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +28,12 @@ public class TeacherControllerWorkDetailInfo {
 
     @Autowired
     WorkDetailService workDetailService;
+    @Autowired
+    TeacherService teacherService;
+    @Autowired
+    ClassService classService;
+    @Autowired
+    StudentService studentService;
 
     @GetMapping("/api/workDetailInfo")
     public List<WorkDetail> workDetailList() throws Exception {
@@ -73,6 +86,47 @@ public class TeacherControllerWorkDetailInfo {
             //   删除失败返回码 400
             return new Result(400);
         }
+    }
+
+
+    @PostMapping("/api/publishWork")
+    public Result publishWork(@RequestBody PublishWork publishWork) throws Exception {
+
+
+
+        WorkDetail workDetail = new WorkDetail();
+        workDetail.setWorkTitle(publishWork.getWorksDetailWorkTitle());
+        workDetail.setPublishContent(publishWork.getWorksDetailPublishContent());
+        workDetail.setAnswer(publishWork.getWorksDetailAnswer());
+        workDetailService.addOrUpdateWorkDetail(workDetail);
+
+
+        Teacher teacher = teacherService.findById(publishWork.getTeacherId());
+
+//        Student student = studentService.findById()
+//        Class mClass = classService.findById(publishWork.getClassId());
+
+
+        System.out.println("发布测试"+publishWork);
+        System.out.println("发布测试"+publishWork.getId());
+        System.out.println("发布测试"+publishWork.getWorksDetailId());
+        System.out.println("发布测试"+publishWork.getWorksDetailWorkTitle());
+        System.out.println("发布测试"+publishWork.getWorksDetailPublishContent());
+        System.out.println("发布测试"+publishWork.getWorksDetailAnswer());
+        System.out.println("发布测试"+publishWork.getTeacherId());
+        System.out.println("发布测试"+publishWork.getClassId());
+        System.out.println("发布测试"+publishWork.getEndTime());
+
+
+//        boolean bl = workDetailService.isExist(workDetail.getId());
+//        if (bl == true){
+//            return null;
+//        }else {
+//            workDetail = workDetailService.addOrUpdateWorkDetail(workDetail);
+//            return new Result(100);
+//        }
+
+        return null;
     }
 
 

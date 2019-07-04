@@ -2,7 +2,7 @@ package com.example.workpigai.controller.teacher;
 
 
 import com.example.workpigai.model.QuestionBank;
-import com.example.workpigai.model.Search;
+import com.example.workpigai.result.Search;
 import com.example.workpigai.result.Result;
 import com.example.workpigai.service.QuestionBankService;
 import org.springframework.beans.factory.annotation.Autowired;

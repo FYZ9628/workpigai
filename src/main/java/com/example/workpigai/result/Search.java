@@ -1,4 +1,4 @@
-package com.example.workpigai.model;
+package com.example.workpigai.result;
 
 public class Search {
     String keywords;
