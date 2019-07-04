@@ -13,6 +13,12 @@ public class Result {
         this.code = code;
     }
 
+    public Result(int code, String account, String password) {
+        this.code = code;
+        this.account = account;
+        this.password = password;
+    }
+
     public Result(int code, String account, String password, String name) {
         this.code = code;
         this.account = account;

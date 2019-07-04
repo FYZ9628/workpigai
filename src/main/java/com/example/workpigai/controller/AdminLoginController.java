@@ -33,9 +33,26 @@ public class AdminLoginController {
         if (null == user) {
             return new Result(400);
         } else if (user.getType() == 1){
-            return new Result(100);
+            String mAccount = user.getAccount();
+            String mPassword = user.getPassword();
+            return new Result(100, mAccount, mPassword);
         } else {
             return new Result(400);
         }
     }
+
+    @PostMapping("/api/updatePassword")
+    public User updatePassword(@RequestBody User user) throws Exception {
+
+        boolean bl = userService.isExist(user.getAccount());
+        if (bl == true){
+            User user1 = userService.addOrUpdateUser(user);
+            User userId = userService.getByAccount(user.getAccount());
+            user1.setId(userId.getId());
+            return user1;
+        }else {
+            return null;
+        }
+    }
+
 }

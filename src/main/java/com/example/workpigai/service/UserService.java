@@ -39,6 +39,10 @@ public class UserService {
         userDao.save(user);
     }
 
+    public User addOrUpdateUser(User user) {
+        return userDao.save(user);
+    }
+
     //    通过 id 删除
     public void deleteById(int id) {
         userDao.deleteById(id);
