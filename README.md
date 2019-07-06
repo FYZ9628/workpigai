@@ -14,6 +14,6 @@
 
 除了分数统计，其他功能都实现了，但是有一些小bug
 
-这次作业分前后端实现，springboot+vue框架开发，前端链接
+这次作业分前后端实现，springboot+vue框架开发，后台链接https://github.com/FYZ9628/workpigai，前端链接
 https://github.com/FYZ9628/vue-workpigai
 前端开发用到了element工具，链接https://element.eleme.cn/#/zh-CN
