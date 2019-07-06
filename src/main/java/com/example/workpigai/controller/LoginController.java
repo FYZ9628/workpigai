@@ -7,6 +7,7 @@ import com.example.workpigai.result.Result;
 import com.example.workpigai.service.StudentService;
 import com.example.workpigai.service.TeacherService;
 import com.example.workpigai.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +35,7 @@ public class LoginController {
     @CrossOrigin
     @PostMapping(value = "api/login")
     @ResponseBody
+    @ApiOperation(value="学生或教师登录")
     public Result login(@RequestBody User requestUser) {
         // 对 html 标签进行转义，防止 XSS 攻击
         String account = requestUser.getAccount();
